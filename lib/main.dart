@@ -62,6 +62,7 @@ class _HomePageState extends State<HomePage> {
                     id: null,
                     name: null,
                     email: null,
+                    deskripsi: null,
                   ),
                 ),
               ).then((_) => refresh());
@@ -79,7 +80,12 @@ class _HomePageState extends State<HomePage> {
           return Slidable(
             child: ListTile(
               title: Text(employee[index]['name']),
-              subtitle: Text(employee[index]['email']),
+              subtitle: Column(
+                children: [
+                  Text(employee[index]['email']),
+                  Text(employee[index]['deskripsi'])
+                ],
+              ),
             ),
             actionPane: SlidableDrawerActionPane(),
             secondaryActions: [
@@ -96,6 +102,7 @@ class _HomePageState extends State<HomePage> {
                         id: employee[index]['id'],
                         name: employee[index]['name'],
                         email: employee[index]['email'],
+                        deskripsi: employee[index]['deskripsi'],
                       ),
                     ),
                   ).then((_) => refresh());

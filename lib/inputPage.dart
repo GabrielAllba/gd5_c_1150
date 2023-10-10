@@ -9,9 +9,10 @@ class InputPage extends StatefulWidget {
     required this.id,
     required this.name,
     required this.email,
+    required this.deskripsi,
   });
 
-  final String? title, name, email;
+  final String? title, name, email, deskripsi;
   final int? id;
 
   @override
@@ -21,6 +22,7 @@ class InputPage extends StatefulWidget {
 class _InputPageState extends State<InputPage> {
   TextEditingController controllerName = TextEditingController();
   TextEditingController controllerEmail = TextEditingController();
+  TextEditingController controllerDeskripsi = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +58,16 @@ class _InputPageState extends State<InputPage> {
           SizedBox(
             height: 48,
           ),
+          TextField(
+            controller: controllerDeskripsi,
+            decoration: const InputDecoration(
+              border: UnderlineInputBorder(),
+              labelText: 'Deskripsi',
+            ),
+          ),
+          SizedBox(
+            height: 48,
+          ),
           ElevatedButton(
             onPressed: () async {
               if (widget.id == null) {
@@ -73,10 +85,12 @@ class _InputPageState extends State<InputPage> {
   }
 
   Future<void> addEmployee() async {
-    await SQLHelper.addEmployee(controllerName.text, controllerEmail.text);
+    await SQLHelper.addEmployee(
+        controllerName.text, controllerEmail.text, controllerDeskripsi.text);
   }
 
   Future<void> editEmployee(int id) async {
-    await SQLHelper.editEmployee(id, controllerName.text, controllerEmail.text);
+    await SQLHelper.editEmployee(id, controllerName.text, controllerEmail.text,
+        controllerDeskripsi.text);
   }
 }
